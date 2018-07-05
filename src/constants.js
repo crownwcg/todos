@@ -1,0 +1,5 @@
+export const CHANGE_INPUT = 'CHANGE_INPUT'
+
+export const ADD_ITEM = 'ADD_ITEM'
+export const COMPLETED_ITEM = 'COMPLETED_ITEM'
+export const SET_VISIBILITY = 'SET_VISIBILITY'
