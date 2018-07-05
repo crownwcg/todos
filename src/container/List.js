@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Item from '../components/Item'
 
-import { connect } from ''
-
 class List extends Component {
 
 	render() {
