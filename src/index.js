@@ -8,11 +8,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducers from './store/reducers'
 
-const initialState = {
-	items: []
-}
-
-const store = createStore(rootReducers, initialState)
+const store = createStore(rootReducers)
 
 ReactDOM.render(
 	<Provider store={store}>
