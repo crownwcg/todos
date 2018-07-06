@@ -41,21 +41,21 @@ const chanegItem = (state={}, action) =>  {
 				{
 					...state,
 					done: !state.done
-				}:
+				} :
 				state
 		case constants.SET_VISIBLE:
 			return action.id === state.id ? 
 				{
 					...state,
 					visible: true
-				}:
+				} :
 				state
 		case constants.SET_INVISIBLE:
 			return action.id === state.id ?
 				{
 					...state,
 					visible: false
-				}:
+				} :
 				state
 		default:
 			return state

@@ -4,13 +4,14 @@ import '../style/Item.css'
 class Item extends Component {
 
 	render() {
-		return this.props.item.visible ? (
+		const { item, handleClick } = this.props
+		return item.visible ? (
 				<div className="item">
-					<span style={{textDecoration: this.props.item.done ? 'line-through' : 'none'}}>
-						{this.props.item.value + "   "}
+					<span style={{textDecoration: item.done ? 'line-through' : 'none'}}>
+						{item.value + "   "}
 					</span>
-					<button onClick={() => this.props.handleClick(this.props.item.id)}>
-						{this.props.item.done ? 'Undo' : 'Complished'}
+					<button onClick={() => handleClick(item.id)}>
+						{item.done ? 'Undo' : 'Complished'}
 					</button>
 				</div>
 			) :

@@ -4,13 +4,13 @@ import Item from './Item'
 class List extends Component {
 
 	render() {
+		const { items, handleClick } = this.props
 		return(
 			<div className="list">
-				{this.props.items.map((item, i) => {
-					return (<Item key={i}
-								  item={item}
-								  handleClick={this.props.handleClick}/>)
-				})}
+				{items.map((item, i) => 
+					<Item key={i}
+						  item={item}
+						  handleClick={handleClick}/>)}
 			</div>
 		)
 	}
