@@ -7,8 +7,8 @@ class List extends Component {
 		const { items, handleClick } = this.props
 		return(
 			<div className="list">
-				{items.map((item, i) => 
-					<Item key={i}
+				{items.map(item => 
+					<Item key={item.id}
 						  item={item}
 						  handleClick={handleClick}/>)}
 			</div>
