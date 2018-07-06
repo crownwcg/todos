@@ -1,108 +1,71 @@
 import React, { Component } from 'react'
 import Header from '../components/Header'
-import Form from '../components/Form'
-import List from './List'
+import List from '../components/List'
 import Footer from '../components/Footer'
 import '../style/App.css'
 
+import { connect } from 'react-redux'
+import { addItem, 
+		 clearItem, 
+		 setDone,
+		 setVisible,
+		 setInvisible } from '../store/actions'
+
+let input
+
+const mapStateToProps = state => ({
+	items: state.items
+})
+
+const mapDispatchToProps = dispatch => ({
+	handleSubmit: (e) => {
+		e.preventDefault()
+		dispatch(addItem(input.value))
+		input.value = ''
+	},
+	handleClick: id => {
+		dispatch(setDone(id))
+	},
+	clear: items => items.forEach(item => item.done ? dispatch(clearItem(item.id)) : item),
+	all: items => items.forEach(item => dispatch(setVisible(item.id))),
+	active: items => items.forEach(item => 
+			item.done ? 
+			dispatch(setInvisible(item.id)) :
+			dispatch(setVisible(item.id))
+		),		
+	completed: items => items.forEach(item => 
+			item.done?
+			dispatch(setVisible(item.id)):
+			dispatch(setInvisible(item.id))
+		),
+})
+
 class App extends Component {
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			inputValue: '',
-			items: [],
-		}
-		this.handleChange = this.handleChange.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleClick = this.handleClick.bind(this)
-		this.clear = this.clear.bind(this)
-		this.all = this.all.bind(this)
-		this.active = this.active.bind(this)
-		this.completed = this.completed.bind(this)
-	}
-
-	handleChange(e) {
-		this.setState({
-			inputValue: e.target.value
-		})
-	}
-
-	handleSubmit(e) {
-		e.preventDefault()
-		this.setState(prevState => ({
-			inputValue: '',
-			items: [
-				...prevState.items,
-				{
-					value: prevState.inputValue,
-					done: false,
-					visible: true
-				}
-			]
-		}))
-	}
-
-	handleClick(i) {
-		const items = this.state.items
-		items[i].done = !items[i].done
-		this.setState({items})
-	}
-
-	clear() {
-		this.setState(prevState => ({
-			inputValue: prevState.inputValue,
-			items: prevState.items.filter(item => item.done === false)
-		}))
-	}
-
-	all() {
-		this.setState(prevState => ({
-			inputValue: prevState.inputValue,
-			items: prevState.items.map((item, i) => ({
-				value: item.value,
-				done: item.done,
-				visible: true
-			}))
-		}))
-	}
-
-	active() {
-		this.setState(prevState => ({
-			inputValue: prevState.inputValue,
-			items: prevState.items.map((item, i) => ({
-				value: item.value,
-				done: item.done,
-				visible: item.done ? false : true
-			}))
-		}))
-	}
-
-	completed() {
-		this.setState(prevState => ({
-			inputValue: prevState.inputValue,
-			items: prevState.items.map((item, i) => ({
-				value: item.value,
-				done: item.done,
-				visible: item.done ? true : false
-			}))
-		}))
-	}
-
   	render() {
+
+  		const {
+  			items,
+  			handleSubmit,
+  			handleClick,
+  			clear,
+  			all,
+  			active,
+  			completed
+  		} = this.props
     	return (
       		<div>
 		        <Header />
-		        <Form inputValue={this.state.inputValue} 
-		              handleChange={this.handleChange}
-		              handleSubmit={this.handleSubmit}/>
-		        <List items={this.state.items}
-		        	  handleClick={this.handleClick}/>
+				<form onSubmit={e => handleSubmit(e)}>
+					<input ref={text => input = text}/>
+				</form>
+		        <List items={items}
+		        	  handleClick={handleClick}/>
 		        <span>
-		        	<button className="All" onClick={this.all}>All</button>
-		        	<button className="Active" onClick={this.active}>Active</button>
-		        	<button className="Completed" onClick={this.completed}>Completed</button>
-		       		<button className="Clear completed" onClick={this.clear}>Clear completed</button>
+		        	<button className="All" onClick={e => all(items)}>All</button>
+		        	<button className="Active" onClick={e => active(items)}>Active</button>
+		        	<button className="Completed" onClick={e => completed(items)}>Completed</button>
+		       		<button className="Clear completed" onClick={e => clear(items)}>Clear completed</button>
 		       	</span>
 		        <Footer />
       		</div>
@@ -110,4 +73,4 @@ class App extends Component {
   	}
 }
 
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App)

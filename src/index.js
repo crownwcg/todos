@@ -4,5 +4,19 @@ import './style/index.css';
 import App from './container/App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducers from './store/reducers'
+
+const initialState = {
+	items: []
+}
+
+const store = createStore(rootReducers, initialState)
+
+ReactDOM.render(
+	<Provider store={store}>
+		<App />
+	</Provider>, 
+	document.getElementById('root'));
 registerServiceWorker();

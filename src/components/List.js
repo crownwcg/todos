@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Item from '../components/Item'
+import Item from './Item'
 
 class List extends Component {
 
@@ -9,9 +9,7 @@ class List extends Component {
 				{this.props.items.map((item, i) => {
 					return (<Item key={i}
 								  item={item}
-								  handleClick={this.props.handleClick}
-								  index={i}
-								  visible={item.visible}/>)
+								  handleClick={this.props.handleClick}/>)
 				})}
 			</div>
 		)

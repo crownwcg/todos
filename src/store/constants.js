@@ -1,0 +1,9 @@
+const constants = {
+	ADD_ITEM: 'ADD_ITEM',
+	CLEAR_ITEM: 'CLEAR_ITEM',
+	COMPLETE_ITEM: 'COMPLETE_ITEM',
+	SET_VISIBLE: 'SET_VISIBLE',
+	SET_INVISIBLE: 'SET_INVISIBLE'
+}
+
+export default constants
