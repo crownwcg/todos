@@ -1,18 +1,18 @@
 .text {
-	font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 span button {
-	margin-top: 100px;
-	margin-left: 15px;
+  margin-top: 100px;
+  margin-left: 15px;
 }
 
 input {
-	width: 400px;
-	height: 20px;
-	margin-top: 20px;
-	text-align: center;
-	font-size: 1.5em;
-	font-family: 'Abel', sans-serif;
-	color: rgb(120, 120, 120)
+  width: 400px;
+  height: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'Abel', sans-serif;
+  color: rgb(120, 120, 120)
 }

@@ -4,9 +4,9 @@ import '../style/Footer.css'
 class Footer extends Component {
   render() {
     return (
-    	<div className="footer">
-    		<footer>@Copyright: Crown</footer>
-    	</div>
+      <div className="footer">
+        <footer>@Copyright: Crown</footer>
+      </div>
     )
   }
 }
