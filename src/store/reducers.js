@@ -1,6 +1,17 @@
 import constants from './constants'
 import { combineReducers } from 'redux'
 
+const input = (state='', action) => {
+	switch(action.type) {
+		case constants.CHANGE_INPUT:
+			return action.value
+		case constants.CLEAR_INPUT:
+			return ''
+		default:
+			return ''
+	}
+}
+
 const items = (state=[], action) => {
 	switch(action.type) {
 		case constants.ADD_ITEM:
@@ -15,7 +26,7 @@ const items = (state=[], action) => {
 		case constants.COMPLETE_ITEM:
 			return state.map(item => chanegItem(item, action))
 		case constants.CLEAR_ITEM:
-			return state.filter(item => item.id !== action.payload)
+			return state.filter(item => item.id !== action.id)
 		default:
 			return state
 	}
@@ -26,21 +37,21 @@ const chanegItem = (state={}, action) =>  {
 		case constants.ADD_ITEM:
 			return action.payload
 		case constants.COMPLETE_ITEM:
-			return action.payload === state.id ? 
+			return action.id === state.id ? 
 				{
 					...state,
 					done: !state.done
 				}:
 				state
 		case constants.SET_VISIBLE:
-			return action.payload === state.id ? 
+			return action.id === state.id ? 
 				{
 					...state,
 					visible: true
 				}:
 				state
 		case constants.SET_INVISIBLE:
-			return action.payload === state.id ?
+			return action.id === state.id ?
 				{
 					...state,
 					visible: false
@@ -52,6 +63,7 @@ const chanegItem = (state={}, action) =>  {
 }
 
 export default combineReducers({
+	input,
 	items,
 	chanegItem
 })

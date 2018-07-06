@@ -7,22 +7,31 @@ export const addItem = (value, done=false, visible=true, id=nextId++) => ({
 	payload: {id, value, done, visible}
 })
 
-export const clearItem = i =>({
+export const clearItem = id =>({
 	type: constants.CLEAR_ITEM,
-	payload: i
+	id
 })
 
-export const setDone = i => ({
+export const setDone = id => ({
 	type: constants.COMPLETE_ITEM,
-	payload: i
+	id
 })
 
-export const setVisible = i => ({
+export const setVisible = id => ({
 	type: constants.SET_VISIBLE,
-	payload: i
+	id
 })
 
-export const setInvisible = i => ({
+export const setInvisible = id => ({
 	type: constants.SET_INVISIBLE,
-	payload: i
+	id
+})
+
+export const changeInput = value => ({
+	type: constants.CHANGE_INPUT,
+	value
+})
+
+export const clearInput = () => ({
+	type: constants.CLEAR_INPUT,
 })

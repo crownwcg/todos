@@ -9,23 +9,23 @@ import { addItem,
 		 clearItem, 
 		 setDone,
 		 setVisible,
-		 setInvisible } from '../store/actions'
-
-let input
+		 setInvisible,
+		 changeInput,
+		 clearInput } from '../store/actions'
 
 const mapStateToProps = state => ({
-	items: state.items
+	items: state.items,
+	input: state.input
 })
 
 const mapDispatchToProps = dispatch => ({
-	handleSubmit: (e) => {
+	handleChange: e => dispatch(changeInput(e.target.value)),
+	handleSubmit: (e, input) => {
 		e.preventDefault()
-		dispatch(addItem(input.value))
-		input.value = ''
+		dispatch(addItem(input))
+		dispatch(clearInput())
 	},
-	handleClick: id => {
-		dispatch(setDone(id))
-	},
+	handleClick: id => dispatch(setDone(id)),
 	clear: items => items.forEach(item => item.done ? dispatch(clearItem(item.id)) : item),
 	all: items => items.forEach(item => dispatch(setVisible(item.id))),
 	active: items => items.forEach(item => 
@@ -46,6 +46,8 @@ class App extends Component {
 
   		const {
   			items,
+  			input,
+  			handleChange,
   			handleSubmit,
   			handleClick,
   			clear,
@@ -56,8 +58,9 @@ class App extends Component {
     	return (
       		<div>
 		        <Header />
-				<form onSubmit={e => handleSubmit(e)}>
-					<input ref={text => input = text}/>
+				<form onSubmit={e => handleSubmit(e, input)}>
+					<input value={input}
+						   onChange={e => handleChange(e)}/>
 				</form>
 		        <List items={items}
 		        	  handleClick={handleClick}/>
