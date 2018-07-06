@@ -64,6 +64,5 @@ const chanegItem = (state={}, action) =>  {
 
 export default combineReducers({
 	input,
-	items,
-	chanegItem
+	items
 })
