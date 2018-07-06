@@ -1,12 +1,12 @@
 import App from '../components/App'
 import { connect } from 'react-redux'
 import { addItem, 
-     clearItem, 
-     setDone,
-     setVisible,
-     setInvisible,
-     changeInput,
-     clearInput } from '../store/actions'
+         clearItem, 
+         setDone,
+         setVisible,
+         setInvisible,
+         changeInput,
+         clearInput } from '../store/actions'
 
 const mapStateToProps = state => ({
   items: state.items,
